@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:logger/logger.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:test_app/elegant_notification_screen.dart';
 import 'package:test_app/firebase_options.dart';
 import 'package:test_app/shimmer_loading_screen.dart';
+import 'package:test_app/stripe_payment_screen.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -35,7 +38,10 @@ Future<void> main() async {
   // await FirebaseMessaging.instance.setAutoInitEnabled(true);
   // print(await FirebaseMessaging.instance.getToken());
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey =
+      "pk_test_51PiabWRuRFmJ3dUi6BzpFUAUChf90Ry1yYvuFYDgC3REpbFY8Nu7uxwW1UwQNtGptfD8ffjkyKq2UFl4YPhoaf1r00S1FqsUW2";
+  //Stripe.merchantIdentifier = 'MerchantIdentifier';
   runApp(const MyApp());
 }
 
@@ -51,7 +57,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const ShimmerloadingScreen(),
+        home: const ElegantNotificationScreen(),
       ),
     );
   }
